@@ -1,0 +1,134 @@
+<div class="container-fluid mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Главная панель</h2>
+  </div>
+
+  <!-- Фильтр периода -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <label class="form-label">Начало периода</label>
+          <input type="date" class="form-control" [(ngModel)]="periodStart" (ngModelChange)="onPeriodChange()">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Конец периода</label>
+          <input type="date" class="form-control" [(ngModel)]="periodEnd" (ngModelChange)="onPeriodChange()">
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+          <button class="btn btn-primary" (click)="loadKPI()">Обновить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPI показатели -->
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+  </div>
+
+  <div *ngIf="kpi && !isLoading" class="row mb-4">
+    <!-- Уровень наценки -->
+    <div class="col-md-3 mb-3">
+      <div class="card text-center">
+        <div class="card-header" style="background-color: #3498db; color: #fff;">
+          <h6 class="mb-0">Уровень наценки</h6>
+        </div>
+        <div class="card-body">
+          <h2 style="color: #3498db; margin: 1rem 0;">{{ kpi.un | number:'1.2-2' }}%</h2>
+          <small class="text-muted">Ун = ((P - Cs) / Cs) × 100%</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Коэффициент доступности питания -->
+    <div class="col-md-3 mb-3">
+      <div class="card text-center">
+        <div class="card-header" style="background-color: #17a2b8; color: #fff;">
+          <h6 class="mb-0">Коэффициент доступности</h6>
+        </div>
+        <div class="card-body">
+          <h2 style="color: #17a2b8; margin: 1rem 0;">{{ kpi.kdp | number:'1.2-2' }}%</h2>
+          <small class="text-muted">Кд.п. = (Средняя цена обеда / Зарплата) × 100%</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Валовая маржа -->
+    <div class="col-md-3 mb-3">
+      <div class="card text-center">
+        <div class="card-header" style="background-color: #27ae60; color: #fff;">
+          <h6 class="mb-0">Валовая маржа</h6>
+        </div>
+        <div class="card-body">
+          <h2 style="color: #27ae60; margin: 1rem 0;">{{ kpi.grossMargin | number:'1.2-2' }}%</h2>
+          <small class="text-muted">((Revenue - COGS) / Revenue) × 100%</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Рентабельность -->
+    <div class="col-md-3 mb-3">
+      <div class="card text-center">
+        <div class="card-header" style="background-color: #f39c12; color: #fff;">
+          <h6 class="mb-0">Рентабельность</h6>
+        </div>
+        <div class="card-body">
+          <h2 style="color: #f39c12; margin: 1rem 0;">{{ kpi.profitability | number:'1.2-2' }}%</h2>
+          <small class="text-muted">(P - Cs) / P × 100</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Дополнительные показатели -->
+  <div *ngIf="kpi && !isLoading" class="row mb-4">
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="mb-0">Средняя себестоимость блюд</h6>
+        </div>
+        <div class="card-body">
+          <h4 class="mb-0">{{ kpi.averageCost | number:'1.2-2' }} BYN</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="mb-0">Средняя цена блюд</h6>
+        </div>
+        <div class="card-body">
+          <h4 class="mb-0">{{ kpi.averagePrice | number:'1.2-2' }} BYN</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="mb-0">Средняя цена комплексного обеда</h6>
+        </div>
+        <div class="card-body">
+          <h4 class="mb-0">{{ kpi.averageComplexLunchPrice | number:'1.2-2' }} BYN</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- График динамики себестоимости -->
+  <div *ngIf="!isLoading" class="card">
+    <div class="card-header">
+      <h5 class="mb-0">Динамика себестоимости</h5>
+    </div>
+    <div class="card-body">
+      <canvas baseChart
+              [data]="costChartData"
+              [options]="costChartOptions"
+              type="line">
+      </canvas>
+    </div>
+  </div>
+</div>
+

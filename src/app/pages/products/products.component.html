@@ -1,0 +1,164 @@
+<div class="container-fluid mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Управление товарами</h2>
+    <button class="btn btn-primary" (click)="openCreateModal()">
+      <i class="bi bi-plus-circle"></i> Добавить товар
+    </button>
+  </div>
+
+  <!-- Таблица товаров -->
+  <div class="card">
+    <div class="card-header">
+      <h5>Список товаров</h5>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Название</th>
+              <th>Категория</th>
+              <th>Cs</th>
+              <th>H</th>
+              <th>Tr</th>
+              <th>A</th>
+              <th>SP</th>
+              <th>НДС</th>
+              <th>Цена (P)</th>
+              <th>Наценка (%)</th>
+              <th>Статус</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products">
+              <td><strong>{{ product.name }}</strong></td>
+              <td>{{ product.category?.name || '-' }}</td>
+              <td>{{ product.cs | number:'1.2-2' }} BYN</td>
+              <td>{{ product.h | number:'1.2-2' }} BYN</td>
+              <td>{{ product.tr | number:'1.2-2' }} BYN</td>
+              <td>{{ product.a | number:'1.2-2' }} BYN</td>
+              <td><strong>{{ product.sp | number:'1.2-2' }} BYN</strong></td>
+              <td>{{ product.vat | number:'1.2-2' }} BYN</td>
+              <td><strong class="text-success">{{ product.p | number:'1.2-2' }} BYN</strong></td>
+              <td>{{ product.un }}%</td>
+              <td>
+                <span [class]="product.isApproved ? 'badge bg-success' : 'badge bg-warning'">
+                  {{ product.isApproved ? 'Утверждено' : 'На утверждении' }}
+                </span>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-warning me-1" (click)="editProduct(product.id)">
+                  Изменить
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="deleteProduct(product.id)">
+                  Удалить
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="products.length === 0">
+              <td colspan="12" class="text-center text-muted">Нет товаров</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно создания товара -->
+<div class="modal-backdrop" *ngIf="showCreateModal" (click)="showCreateModal = false">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h5 class="modal-title">Добавить товар</h5>
+      <button type="button" class="btn-close" (click)="showCreateModal = false">×</button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="addProduct()">
+        <div class="mb-3">
+          <label class="form-label">Название</label>
+          <input type="text" class="form-control" [(ngModel)]="newProduct.name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Описание</label>
+          <textarea class="form-control" [(ngModel)]="newProduct.description" name="description" rows="2"></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Категория</label>
+          <select class="form-select" [(ngModel)]="newProduct.categoryId" name="categoryId" required>
+            <option [ngValue]="0">Выберите категорию</option>
+            <option *ngFor="let category of categories" [ngValue]="category.id">
+              {{ category.name }} (наценка {{ category.markupPercent }}%)
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Стоимость сырьевого набора (Cs)</label>
+          <input type="number" class="form-control" [(ngModel)]="newProduct.cs" name="cs" step="0.01" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Количество порций</label>
+          <input type="number" class="form-control" [(ngModel)]="newProduct.portionCount" name="portionCount" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">
+            <input type="checkbox" [(ngModel)]="newProduct.isTransportedOutside" name="isTransportedOutside">
+            Транспортировка за пределы предприятия (НДС)
+          </label>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="showCreateModal = false">Отмена</button>
+          <button type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно редактирования товара -->
+<div class="modal-backdrop" *ngIf="selectedProduct && selectedProduct.id > 0" (click)="cancelEdit()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h5 class="modal-title">Редактировать товар</h5>
+      <button type="button" class="btn-close" (click)="cancelEdit()">×</button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="updateProduct()">
+        <div class="mb-3">
+          <label class="form-label">Название</label>
+          <input type="text" class="form-control" [(ngModel)]="editProductDto.name" name="editName" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Описание</label>
+          <textarea class="form-control" [(ngModel)]="editProductDto.description" name="editDescription" rows="2"></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Категория</label>
+          <select class="form-select" [(ngModel)]="editProductDto.categoryId" name="editCategoryId" required>
+            <option *ngFor="let category of categories" [ngValue]="category.id">
+              {{ category.name }} (наценка {{ category.markupPercent }}%)
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Стоимость сырьевого набора (Cs)</label>
+          <input type="number" class="form-control" [(ngModel)]="editProductDto.cs" name="editCs" step="0.01" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Количество порций</label>
+          <input type="number" class="form-control" [(ngModel)]="editProductDto.portionCount" name="editPortionCount" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">
+            <input type="checkbox" [(ngModel)]="editProductDto.isTransportedOutside" name="editIsTransportedOutside">
+            Транспортировка за пределы предприятия (НДС)
+          </label>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Отмена</button>
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

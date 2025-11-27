@@ -1,0 +1,68 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>Система аналитики цен</h2>
+      <p class="text-muted">Вход в систему</p>
+    </div>
+    
+    <form (ngSubmit)="submit()" class="login-form">
+      <div class="mb-3">
+        <label class="form-label">Логин</label>
+        <input
+          type="text"
+          [(ngModel)]="form.username"
+          name="username"
+          class="form-control"
+          placeholder="Введите логин"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Пароль</label>
+        <input
+          type="password"
+          [(ngModel)]="form.password"
+          name="password"
+          class="form-control"
+          placeholder="Введите пароль"
+          required
+        />
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Войти</button>
+    </form>
+
+    <!-- Информация о пользователях по умолчанию -->
+    <div class="login-info">
+      <div class="info-header">
+        <strong>Пользователи по умолчанию:</strong>
+      </div>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="info-role">Администратор:</span>
+          <span class="info-credentials">admin / admin</span>
+        </div>
+        <div class="info-item">
+          <span class="info-role">Экономист:</span>
+          <span class="info-credentials">economist / economist</span>
+        </div>
+        <div class="info-item">
+          <span class="info-role">Бухгалтер:</span>
+          <span class="info-credentials">accountant / accountant</span>
+        </div>
+        <div class="info-item">
+          <span class="info-role">Начальник:</span>
+          <span class="info-credentials">manager / manager</span>
+        </div>
+      </div>
+      <div class="info-note">
+        <small>Новых пользователей создает администратор<br>в разделе <strong>"Пользователи"</strong></small>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,136 @@
+<div class="container-fluid mt-4">
+  <h2>Аналитика и прогнозирование</h2>
+
+  <!-- Фильтр периода -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <label class="form-label">Начало периода</label>
+          <input type="date" class="form-control" [(ngModel)]="periodStart" (change)="onPeriodChange()">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Конец периода</label>
+          <input type="date" class="form-control" [(ngModel)]="periodEnd" (change)="onPeriodChange()">
+        </div>
+        <div class="col-md-4 d-flex align-items-end gap-2">
+          <button class="btn btn-primary" (click)="onPeriodChange()">Обновить</button>
+          <div class="btn-group">
+            <button class="btn btn-success" (click)="exportToExcel('products')">Экспорт Excel</button>
+            <button class="btn btn-danger" (click)="exportToPDF('products')">Экспорт PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- График динамики KPI -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>Динамика KPI показателей</h5>
+    </div>
+    <div class="card-body">
+      <canvas baseChart
+              [data]="trendsChartData"
+              [options]="trendsChartOptions"
+              type="line">
+      </canvas>
+    </div>
+  </div>
+
+  <!-- Прогнозирование -->
+  <div class="card mb-4" *ngIf="kpiTrends.length >= 2">
+    <div class="card-header">
+      <h5>Прогноз на следующий период</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <h6>Уровень наценки</h6>
+              <h4 class="text-primary">{{ predictNextPeriod().un | number:'1.2-2' }}%</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <h6>Валовая маржа</h6>
+              <h4 class="text-success">{{ predictNextPeriod().grossMargin | number:'1.2-2' }}%</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <h6>Рентабельность</h6>
+              <h4 class="text-warning">{{ predictNextPeriod().profitability | number:'1.2-2' }}%</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <small class="text-muted mt-2 d-block">* Прогноз основан на линейной экстраполяции тренда</small>
+    </div>
+  </div>
+
+  <!-- Анализ наценки по продукту -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>Анализ наценки по продукту</h5>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <label for="productSelect">Выберите продукт:</label>
+        <select id="productSelect" class="form-select" [(ngModel)]="selectedProductId" (change)="loadMarkupChart()">
+          <option *ngFor="let p of products" [ngValue]="p.id">{{ p.name }}</option>
+        </select>
+      </div>
+
+      <canvas baseChart
+              [data]="markupChartData"
+              [options]="markupChartOptions"
+              type="bar">
+      </canvas>
+    </div>
+  </div>
+
+  <!-- Отчёт по прибыльности -->
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5>Отчёт по прибыльности товаров</h5>
+      <div class="btn-group">
+        <button class="btn btn-sm btn-outline-primary" (click)="loadProfitReport()">Обновить</button>
+        <button class="btn btn-sm btn-outline-secondary" (click)="printReport()">Печать</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div id="print-area" class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Продукт</th>
+              <th>Себестоимость</th>
+              <th>Средняя цена</th>
+              <th>Средняя наценка (%)</th>
+              <th>Кол-во расчётов</th>
+              <th>Прибыль с единицы</th>
+              <th>Общая прибыль</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of profitReport">
+              <td>{{ item.productName }}</td>
+              <td>{{ item.baseCost | number:'1.2-2' }} BYN</td>
+              <td>{{ item.averagePrice | number:'1.2-2' }} BYN</td>
+              <td>{{ item.averageMarkup | number:'1.1-1' }}</td>
+              <td>{{ item.count }}</td>
+              <td>{{ item.profitPerUnit | number:'1.2-2' }} BYN</td>
+              <td>{{ item.totalProfit | number:'1.2-2' }} BYN</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

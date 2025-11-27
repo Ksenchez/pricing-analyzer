@@ -1,0 +1,34 @@
+// Стили для страницы товаров
+
+.card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  font-size: 0.875rem;
+  
+  th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+  
+  td {
+    vertical-align: middle;
+  }
+  
+  .text-success {
+    font-weight: 600;
+    color: #27ae60;
+  }
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.me-1 {
+  margin-right: 0.25rem;
+}

@@ -1,0 +1,58 @@
+<div class="pricing-policies-list">
+    <h3>Ценовые политики</h3>
+    <ul>
+      <li *ngFor="let policy of pricingPolicies">
+        <span>{{ policy.policyName }} - {{ policy.defaultMarkupPercent }}%</span>
+        <button (click)="editPricingPolicy(policy.id)">Редактировать</button>
+        <button (click)="deletePricingPolicy(policy.id)">Удалить</button>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="new-policy-form">
+    <h3>Добавить ценовую политику</h3>
+    <form (ngSubmit)="addPricingPolicy()">
+      <label for="policyName">Название:</label>
+      <input id="policyName" [(ngModel)]="newPolicy.policyName" name="policyName" required />
+  
+      <label for="description">Описание:</label>
+      <input id="description" [(ngModel)]="newPolicy.description" name="description" required />
+  
+      <label for="defaultMarkupPercent">Процент наценки:</label>
+      <input id="defaultMarkupPercent" type="number" [(ngModel)]="newPolicy.defaultMarkupPercent" name="defaultMarkupPercent" required />
+  
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="editIsActive" [(ngModel)]="selectedPolicy.isActive" name="editIsActive">
+        <label class="form-check-label" for="editIsActive">
+          Активная
+        </label>
+      </div>
+  
+      <button type="submit">Добавить</button>
+    </form>
+  </div>
+  
+  <div *ngIf="selectedPolicy.id !== -1" class="modal-backdrop">
+    <div class="modal">
+    <h3>Редактировать ценовую политику</h3>
+    <form (ngSubmit)="updatePricingPolicy()">
+      <label for="editPolicyName">Название:</label>
+      <input id="editPolicyName" [(ngModel)]="selectedPolicy.policyName" name="editPolicyName" required />
+  
+      <label for="editDescription">Описание:</label>
+      <input id="editDescription" [(ngModel)]="selectedPolicy.description" name="editDescription" required />
+  
+      <label for="editDefaultMarkupPercent">Процент наценки:</label>
+      <input id="editDefaultMarkupPercent" type="number" [(ngModel)]="selectedPolicy.defaultMarkupPercent" name="editDefaultMarkupPercent" required />
+  
+      
+      <div class="form-check2">
+        <label for="editIsActive">Активная:</label>
+      <input class="form-check-input2" id="editIsActive" type="checkbox" [(ngModel)]="selectedPolicy.isActive" name="editIsActive" />
+    </div>
+      <button type="submit">Обновить</button>
+      <button type="button" (click)="cancelEdit()">Отменить</button>
+    </form>
+  </div>
+</div>
+  

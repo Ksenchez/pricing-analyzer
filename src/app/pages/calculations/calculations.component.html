@@ -1,0 +1,76 @@
+<div class="container-fluid mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Расчёты себестоимости и цен</h2>
+  </div>
+
+  <!-- Форма нового расчёта -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">Новый расчёт</h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="submitCalculation()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Продукт</label>
+            <select [(ngModel)]="selectedProductId" name="product" required class="form-select">
+              <option [value]="0">Выберите продукт</option>
+              <option *ngFor="let p of products" [value]="p.id">{{ p.name }}</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Процент наценки</label>
+            <input type="number" [(ngModel)]="customMarkup" name="markup" class="form-control" step="0.01" required />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Рассчитать</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- История расчётов -->
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">История расчётов</h5>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Продукт</th>
+              <th>Cs</th>
+              <th>H</th>
+              <th>Tr</th>
+              <th>A</th>
+              <th>SP</th>
+              <th>НДС</th>
+              <th>Цена (P)</th>
+              <th>Наценка (%)</th>
+              <th>Дата расчёта</th>
+              <th>Пользователь</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let calc of calculations">
+              <td><strong>{{ calc.product?.name }}</strong></td>
+              <td>{{ calc.cs | number:'1.2-2' }} BYN</td>
+              <td>{{ calc.h | number:'1.2-2' }} BYN</td>
+              <td>{{ calc.tr | number:'1.2-2' }} BYN</td>
+              <td>{{ calc.a | number:'1.2-2' }} BYN</td>
+              <td><strong>{{ calc.sp | number:'1.2-2' }} BYN</strong></td>
+              <td>{{ calc.vat | number:'1.2-2' }} BYN</td>
+              <td><strong class="text-success">{{ calc.p | number:'1.2-2' }} BYN</strong></td>
+              <td>{{ calc.un }}%</td>
+              <td>{{ calc.calculatedAt | date:'dd.MM.yyyy HH:mm' }}</td>
+              <td>{{ calc.user?.username }}</td>
+            </tr>
+            <tr *ngIf="calculations.length === 0">
+              <td colspan="11" class="text-center text-muted">Нет расчётов</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

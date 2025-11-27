@@ -1,0 +1,62 @@
+<nav *ngIf="username" class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/dashboard">Система аналитики цен</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" routerLink="/dashboard">Главная</a></li>
+        
+        <!-- Экономист -->
+        <li class="nav-item" *ngIf="canAccessEconomistFeatures()">
+          <a class="nav-link" routerLink="/normatives">Нормативы</a>
+        </li>
+        <li class="nav-item" *ngIf="canAccessEconomistFeatures()">
+          <a class="nav-link" routerLink="/categories">Категории</a>
+        </li>
+        
+        <!-- Бухгалтер и Экономист -->
+        <li class="nav-item" *ngIf="canAccessAccountantFeatures() || canAccessEconomistFeatures()">
+          <a class="nav-link" routerLink="/products">Товары</a>
+        </li>
+        <li class="nav-item" *ngIf="canAccessAccountantFeatures()">
+          <a class="nav-link" routerLink="/import-products">Импорт из 1С</a>
+        </li>
+        <li class="nav-item" *ngIf="canAccessAccountantFeatures() || canAccessManagerFeatures()">
+          <a class="nav-link" routerLink="/price-approval">Утверждение цен</a>
+        </li>
+        <li class="nav-item" *ngIf="canAccessAccountantFeatures()">
+          <a class="nav-link" routerLink="/calculations">Расчёты</a>
+        </li>
+        
+        <!-- Экономист и Начальник -->
+        <li class="nav-item" *ngIf="canAccessEconomistFeatures() || canAccessManagerFeatures()">
+          <a class="nav-link" routerLink="/statistics">Аналитика</a>
+        </li>
+        <li class="nav-item" *ngIf="canAccessEconomistFeatures()">
+          <a class="nav-link" routerLink="/what-if">Сценарии "что-если"</a>
+        </li>
+        
+        <!-- Админ -->
+        <li class="nav-item" *ngIf="canAccessAdminFeatures()">
+          <a class="nav-link" routerLink="/users">Пользователи</a>
+        </li>
+      </ul>
+
+      <div class="text-white me-3">
+        <span>Пользователь: <strong>{{ username }}</strong></span>
+        <br>
+        <span>Роль: <strong>{{ getRoleLabel() }}</strong></span>
+      </div>
+
+      <button class="btn btn-outline-light" (click)="logout()">Выход</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid mt-4">
+  <router-outlet></router-outlet>
+</div>

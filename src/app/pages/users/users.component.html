@@ -1,0 +1,172 @@
+<div class="container-fluid mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Управление пользователями</h2>
+    <button *ngIf="canManage" class="btn btn-primary" (click)="openCreateModal()">
+      <i class="bi bi-plus-circle"></i> Добавить пользователя
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Логин</th>
+              <th>ФИО</th>
+              <th>Email</th>
+              <th>Роль</th>
+              <th>Статус</th>
+              <th>Дата создания</th>
+              <th *ngIf="canManage">Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.fullName || '-' }}</td>
+              <td>{{ user.email || '-' }}</td>
+              <td>{{ getRoleLabel(user.role) }}</td>
+              <td>
+                <span [class]="user.isActive ? 'badge bg-success' : 'badge bg-danger'">
+                  {{ user.isActive ? 'Активен' : 'Заблокирован' }}
+                </span>
+              </td>
+              <td>{{ user.createdAt | date:'dd.MM.yyyy' }}</td>
+              <td *ngIf="canManage">
+                <button class="btn btn-sm btn-warning me-1" (click)="openEditModal(user)">
+                  Изменить
+                </button>
+                <button class="btn btn-sm btn-info me-1" (click)="openResetPasswordModal(user)">
+                  Сброс пароля
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">
+                  Удалить
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно создания пользователя -->
+<div class="modal fade" [class.show]="showCreateModal" [style.display]="showCreateModal ? 'block' : 'none'" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Добавить пользователя</h5>
+        <button type="button" class="btn-close" (click)="showCreateModal = false"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Логин</label>
+            <input type="text" class="form-control" [(ngModel)]="newUser.username" name="username" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Пароль</label>
+            <input type="password" class="form-control" [(ngModel)]="newUser.password" name="password" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Роль</label>
+            <select class="form-select" [(ngModel)]="newUser.role" name="role">
+              <option *ngFor="let role of roles" [value]="role">
+                {{ getRoleLabel(role) }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">ФИО</label>
+            <input type="text" class="form-control" [(ngModel)]="newUser.fullName" name="fullName">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" [(ngModel)]="newUser.email" name="email">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="showCreateModal = false">Отмена</button>
+        <button type="button" class="btn btn-primary" (click)="createUser()">Создать</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно редактирования пользователя -->
+<div class="modal fade" [class.show]="showEditModal" [style.display]="showEditModal ? 'block' : 'none'" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Изменить пользователя</h5>
+        <button type="button" class="btn-close" (click)="showEditModal = false"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Логин</label>
+            <input type="text" class="form-control" [(ngModel)]="editUser.username" name="username">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Роль</label>
+            <select class="form-select" [(ngModel)]="editUser.role" name="role">
+              <option *ngFor="let role of roles" [value]="role">
+                {{ getRoleLabel(role) }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">ФИО</label>
+            <input type="text" class="form-control" [(ngModel)]="editUser.fullName" name="fullName">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" [(ngModel)]="editUser.email" name="email">
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="editUser.isActive" name="isActive" id="isActive">
+              <label class="form-check-label" for="isActive">
+                Активен
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="showEditModal = false">Отмена</button>
+        <button type="button" class="btn btn-primary" (click)="updateUser()">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно сброса пароля -->
+<div class="modal fade" [class.show]="showResetPasswordModal" [style.display]="showResetPasswordModal ? 'block' : 'none'" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Сброс пароля для {{ selectedUser?.username }}</h5>
+        <button type="button" class="btn-close" (click)="showResetPasswordModal = false"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Новый пароль</label>
+          <input type="password" class="form-control" [(ngModel)]="newPassword" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="showResetPasswordModal = false">Отмена</button>
+        <button type="button" class="btn btn-primary" (click)="resetPassword()">Изменить пароль</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
