@@ -524,7 +524,7 @@
           <mxGeometry height="30" width="180" x="2210" y="800" as="geometry" />
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-2" parent="1" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;Frontend&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" vertex="1">
-          <mxGeometry height="255" width="410" x="2000" y="855" as="geometry" />
+          <mxGeometry height="255" width="410" x="1950" y="847.5" as="geometry" />
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-3" parent="JGEM4v_NsvLPniSzYLLr-2" style="shape=component;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
           <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
@@ -532,7 +532,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-4" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="Auth Module" vertex="1">
-          <mxGeometry height="80" width="160" x="2030" y="900" as="geometry" />
+          <mxGeometry height="80" width="160" x="1980" y="892.5" as="geometry" />
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-5" parent="JGEM4v_NsvLPniSzYLLr-4" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
           <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
@@ -540,7 +540,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-6" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="Products Module" vertex="1">
-          <mxGeometry height="80" width="165" x="2225" y="900" as="geometry" />
+          <mxGeometry height="80" width="165" x="2175" y="892.5" as="geometry" />
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-7" parent="JGEM4v_NsvLPniSzYLLr-6" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
           <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
@@ -548,7 +548,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-8" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="Pricing Policies Module" vertex="1">
-          <mxGeometry height="80" width="160" x="2030" y="1010" as="geometry" />
+          <mxGeometry height="80" width="160" x="1980" y="1002.5" as="geometry" />
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-9" parent="JGEM4v_NsvLPniSzYLLr-8" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
           <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
@@ -556,7 +556,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-10" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="Calculations Module" vertex="1">
-          <mxGeometry height="80" width="165" x="2225" y="1010" as="geometry" />
+          <mxGeometry height="80" width="165" x="2175" y="1002.5" as="geometry" />
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-11" parent="JGEM4v_NsvLPniSzYLLr-10" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
           <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
@@ -679,6 +679,17 @@
         <mxCell id="JGEM4v_NsvLPniSzYLLr-43" parent="JGEM4v_NsvLPniSzYLLr-42" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
           <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
             <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-44" edge="1" parent="1" source="JGEM4v_NsvLPniSzYLLr-2" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="JGEM4v_NsvLPniSzYLLr-12" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="2670" y="1170" as="sourcePoint" />
+            <mxPoint x="2720" y="1120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-45" connectable="0" parent="JGEM4v_NsvLPniSzYLLr-44" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="REST API (JSON)" vertex="1">
+          <mxGeometry relative="1" x="-0.6433" as="geometry">
+            <mxPoint x="38" as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
