@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" version="29.2.1">
   <diagram name="Страница-1" id="s6ycr7lq-y7ASQ8fWlVa">
-    <mxGraphModel dx="2037" dy="1144" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1358" dy="763" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -519,6 +519,73 @@
         </mxCell>
         <mxCell id="3yducP1E5WqnbX7ibQoF-161" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Выход" vertex="1">
           <mxGeometry height="60" width="60" x="2310" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Диаграмма компонентов" vertex="1">
+          <mxGeometry height="30" width="180" x="2210" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-2" parent="1" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;Frontend&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="255" width="410" x="2000" y="855" as="geometry" />
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-3" parent="JGEM4v_NsvLPniSzYLLr-2" style="shape=component;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
+          <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
+            <mxPoint x="-24" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-4" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="Auth Module" vertex="1">
+          <mxGeometry height="80" width="160" x="2030" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-5" parent="JGEM4v_NsvLPniSzYLLr-4" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
+          <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-6" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="Products Module" vertex="1">
+          <mxGeometry height="80" width="165" x="2225" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-7" parent="JGEM4v_NsvLPniSzYLLr-6" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
+          <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-8" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="Pricing Policies Module" vertex="1">
+          <mxGeometry height="80" width="160" x="2030" y="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-9" parent="JGEM4v_NsvLPniSzYLLr-8" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
+          <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-10" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="Calculations Module" vertex="1">
+          <mxGeometry height="80" width="165" x="2225" y="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-11" parent="JGEM4v_NsvLPniSzYLLr-10" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
+          <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-12" parent="1" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;Backend&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="310" width="590" x="2570" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-13" parent="JGEM4v_NsvLPniSzYLLr-12" style="shape=component;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
+          <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
+            <mxPoint x="-24" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-14" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="ApplicationDbContext (EF Core)" vertex="1">
+          <mxGeometry height="80" width="160" x="2600" y="960" as="geometry" />
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-15" parent="JGEM4v_NsvLPniSzYLLr-14" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
+          <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-16" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="ApplicationDbContext (EF Core)" vertex="1">
+          <mxGeometry height="80" width="160" x="2770" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="JGEM4v_NsvLPniSzYLLr-17" parent="JGEM4v_NsvLPniSzYLLr-16" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
+          <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
