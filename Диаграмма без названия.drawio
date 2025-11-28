@@ -580,7 +580,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-16" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="ApplicationDbContext (EF Core)" vertex="1">
-          <mxGeometry height="80" width="160" x="2770" y="1150" as="geometry" />
+          <mxGeometry height="80" width="160" x="2785" y="960" as="geometry" />
         </mxCell>
         <mxCell id="JGEM4v_NsvLPniSzYLLr-17" parent="JGEM4v_NsvLPniSzYLLr-16" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
           <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
